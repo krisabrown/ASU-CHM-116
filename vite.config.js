@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/chemistry-grade-calculator/"
+  base: "/ASU-CHM-116/"
 });
