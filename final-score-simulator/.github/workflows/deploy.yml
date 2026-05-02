@@ -28,15 +28,17 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
+        working-directory: ./final-score-simulator
         run: npm install
 
       - name: Build
+        working-directory: ./final-score-simulator
         run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./final-score-simulator/dist
 
   deploy:
     environment:
