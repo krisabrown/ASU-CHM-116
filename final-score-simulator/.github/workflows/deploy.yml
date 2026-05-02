@@ -35,10 +35,15 @@ jobs:
         working-directory: ./final-score-simulator
         run: npm run build
 
+      - name: Prepare Pages folder
+        run: |
+          mkdir -p pages/final-score-simulator
+          cp -R final-score-simulator/dist/* pages/final-score-simulator/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./final-score-simulator/dist
+          path: ./pages
 
   deploy:
     environment:
