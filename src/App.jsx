@@ -155,12 +155,12 @@ function NumberInput({ label, value, onChange, suffix = "%", helper, max = 100, 
 
 export default function ChemistryFinalGradeCalculator() {
   const [weeklyAverage, setWeeklyAverage] = useState("70");
-  const [labAverage, setLabAverage] = useState("99.5");
-  const [homeworkAverage, setHomeworkAverage] = useState("99.5");
-  const [finalPercent, setFinalPercent] = useState("50");
+  const [labAverage, setLabAverage] = useState("100");
+  const [homeworkAverage, setHomeworkAverage] = useState("100");
+  const [finalPercent, setFinalPercent] = useState("74");
   const [useIndividualExams, setUseIndividualExams] = useState(true);
   const [examScores, setExamScores] = useState([24, 25.2, 36, 28.8, 25.2, 50.4]);
-  const [selectedEc, setSelectedEc] = useState({});
+  const [selectedEc, setSelectedEc] = useState({ review50: true });
 
   const selectedEcPoints = useMemo(
     () => ecItems.reduce((sum, item) => sum + (selectedEc[item.id] ? item.points : 0), 0),
@@ -210,7 +210,7 @@ export default function ChemistryFinalGradeCalculator() {
   }, [settings, totalEc, finalNumber, currentLetter]);
 
   const resetEc = () => {
-    setSelectedEc({});
+    setSelectedEc({ review50: true });
   };
 
   const toggleAllEc = () => {
@@ -218,6 +218,9 @@ export default function ChemistryFinalGradeCalculator() {
     ecItems.forEach((item) => {
       next[item.id] = !allEcSelected;
     });
+    if (allEcSelected) {
+      next.review50 = true;
+    }
     setSelectedEc(next);
   };
 
@@ -262,8 +265,8 @@ export default function ChemistryFinalGradeCalculator() {
                   />
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
-                  <NumberInput label="Laboratory average" value={labAverage} onChange={setLabAverage} />
-                  <NumberInput label="Chapter homework average" value={homeworkAverage} onChange={setHomeworkAverage} />
+                  <NumberInput label="Laboratory Average" value={labAverage} onChange={setLabAverage} />
+                  <NumberInput label="Chapter Homework/CC Average" value={homeworkAverage} onChange={setHomeworkAverage} />
                 </div>
               </CardContent>
             </Card>
